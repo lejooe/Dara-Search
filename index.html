@@ -3,514 +3,541 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DARA Advisory — Diaspora & Africa Talent Search</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<title>DARA Advisory</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
-:root {
-  --black:     #0c0c0b;
-  --dark:      #1a130e;
-  --brown:     #643C17;
-  --sand:      #C4956A;
-  --warm:      #D4A96A;
-  --cream:     #F7F3EE;
-  --grey:      #888880;
-  --mid:       #3a3830;
-  --white:     #FFFFFF;
+:root{
+  --black:#0b0a09;
+  --brown:#643C17;
+  --sand:#C4956A;
+  --warm:#D4A96A;
+  --cream:#F5F0E8;
+  --parchment:#EDE5D8;
+  --grey:#8a8880;
+  --mid:#3a3530;
+  --white:#fff;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{background:var(--cream);color:var(--black);font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;overflow-x:hidden;cursor:none;}
+body{background:var(--black);color:var(--white);font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;overflow-x:hidden;cursor:none;}
 
-.cur{width:7px;height:7px;background:var(--sand);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s;}
-.cur-r{width:32px;height:32px;border:1px solid rgba(196,149,106,.45);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .25s;}
+/* ── cursor ── */
+.dot{width:6px;height:6px;background:var(--sand);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+.ring{width:30px;height:30px;border:1px solid rgba(196,149,106,.4);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .2s;}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:26px 60px;display:flex;justify-content:space-between;align-items:center;}
-.nav-bg{position:absolute;inset:0;transition:background .4s;}
-nav.scrolled .nav-bg{background:rgba(247,243,238,.96);backdrop-filter:blur(12px);}
-.nav-logo{position:relative;z-index:1;text-decoration:none;display:flex;align-items:center;}
-.nav-links{display:flex;gap:44px;list-style:none;position:relative;z-index:1;align-items:center;}
-.nav-links a{color:rgba(255,255,255,.65);text-decoration:none;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;font-family:'DM Mono',monospace;font-weight:300;transition:color .3s;}
-nav.scrolled .nav-links a{color:var(--mid);}
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:0 56px;height:72px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background .5s,border-color .5s;
+}
+nav.solid{background:rgba(11,10,9,.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.06);}
+.logo-wrap{text-decoration:none;}
+.nav-links{display:flex;gap:40px;list-style:none;align-items:center;}
+.nav-links a{color:rgba(255,255,255,.5);text-decoration:none;font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-family:'DM Mono',monospace;transition:color .3s;}
 .nav-links a:hover{color:var(--sand);}
-.nav-cta{border:1px solid rgba(255,255,255,.35);color:rgba(255,255,255,.85)!important;padding:10px 26px;transition:all .3s!important;}
-nav.scrolled .nav-cta{border-color:rgba(196,149,106,.5)!important;color:var(--sand)!important;}
-.nav-cta:hover{background:var(--sand)!important;border-color:var(--sand)!important;color:var(--black)!important;}
+.nav-pill{border:1px solid rgba(196,149,106,.4);color:var(--sand)!important;padding:9px 24px;transition:all .3s!important;}
+.nav-pill:hover{background:var(--sand)!important;color:var(--black)!important;}
 
-/* HERO */
-.hero{height:100vh;position:relative;display:flex;align-items:flex-end;padding:0 60px 88px;overflow:hidden;background:var(--black);}
-.hero-art{position:absolute;inset:0;background:
-  radial-gradient(ellipse 90% 70% at 70% 35%, rgba(100,60,23,.7) 0%, transparent 55%),
-  radial-gradient(ellipse 50% 80% at 15% 65%, rgba(58,38,29,.9) 0%, transparent 50%),
-  radial-gradient(ellipse 60% 50% at 90% 80%, rgba(44,49,60,.6) 0%, transparent 50%),
-  #0c0c0b;
-  animation:breathe 12s ease-in-out infinite;}
-@keyframes breathe{0%,100%{filter:brightness(1);}50%{filter:brightness(1.12);}}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(12,12,11,.25) 0%,rgba(12,12,11,.05) 25%,rgba(12,12,11,.55) 60%,rgba(12,12,11,.96) 100%);}
-.hero-grain{position:absolute;inset:0;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px;}
-.hero-content{position:relative;z-index:2;max-width:880px;}
-.hero-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.38em;text-transform:uppercase;color:var(--sand);margin-bottom:36px;opacity:0;animation:up .9s ease .3s forwards;display:flex;align-items:center;gap:16px;}
-.hero-eyebrow::before{content:'';width:36px;height:1px;background:var(--sand);}
-.hero-h1{font-size:clamp(52px,7.5vw,108px);font-weight:300;line-height:1.01;letter-spacing:-.02em;color:var(--white);opacity:0;animation:up .9s ease .55s forwards;}
+/* ── HERO FULL ── */
+.hero{
+  height:100vh;min-height:700px;
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 56px 72px;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 100% 60% at 65% 30%, rgba(100,60,23,.75) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 80% at 10% 70%, rgba(58,38,29,.95) 0%, transparent 50%),
+    #0b0a09;
+  animation:hbreathe 14s ease-in-out infinite;
+}
+@keyframes hbreathe{0%,100%{filter:brightness(1)}50%{filter:brightness(1.1)}}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,rgba(11,10,9,.3) 40%,rgba(11,10,9,.9) 75%,#0b0a09 100%);}
+.hero-noise{position:absolute;inset:0;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px;}
+
+.hero-inner{position:relative;z-index:2;max-width:1000px;}
+.hero-tag{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.4em;text-transform:uppercase;color:var(--sand);margin-bottom:28px;opacity:0;animation:fadeup .9s .2s forwards;display:flex;align-items:center;gap:14px;}
+.hero-tag::before{content:'';width:32px;height:1px;background:var(--sand);}
+.hero-h1{font-size:clamp(48px,7vw,100px);font-weight:300;line-height:1.02;letter-spacing:-.02em;opacity:0;animation:fadeup .9s .4s forwards;}
 .hero-h1 em{font-style:italic;color:var(--sand);}
-.hero-sub{margin-top:32px;font-size:20px;line-height:1.7;color:rgba(255,255,255,.55);max-width:520px;font-weight:300;opacity:0;animation:up .9s ease .75s forwards;}
-.hero-actions{margin-top:60px;display:flex;gap:32px;align-items:center;opacity:0;animation:up .9s ease .95s forwards;}
-.btn-fill{background:var(--sand);color:var(--black);padding:18px 52px;font-family:'DM Mono',monospace;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;transition:all .3s;display:inline-block;}
-.btn-fill:hover{background:var(--warm);transform:translateY(-2px);}
-.btn-ghost{color:rgba(255,255,255,.55);text-decoration:none;font-family:'DM Mono',monospace;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;transition:color .3s;display:flex;align-items:center;gap:10px;}
-.btn-ghost span{transition:transform .3s;}
-.btn-ghost:hover{color:var(--white);}
-.btn-ghost:hover span{transform:translateX(6px);}
-.hero-scroll-ind{position:absolute;bottom:88px;right:60px;z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;animation:fadeIn 1s ease 1.5s forwards;}
-.hero-scroll-ind p{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.35);writing-mode:vertical-rl;}
-.scroll-bar{width:1px;height:56px;background:linear-gradient(to bottom,var(--sand),transparent);animation:pulse 2s ease infinite;}
+.hero-caption{margin-top:24px;font-size:18px;line-height:1.7;color:rgba(255,255,255,.5);max-width:500px;opacity:0;animation:fadeup .9s .6s forwards;}
 
-.s-cream{background:var(--cream);color:var(--black);}
-.s-dark{background:var(--black);color:var(--white);}
-.s-mid{background:#141210;color:var(--white);}
+/* CTA split — les deux publics côte à côte, CV dominant */
+.hero-ctas{
+  margin-top:52px;
+  display:flex;gap:0;
+  opacity:0;animation:fadeup .9s .8s forwards;
+}
+.cta-candidat{
+  background:var(--sand);color:var(--black);
+  padding:22px 48px;
+  font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+  text-decoration:none;display:flex;align-items:center;gap:14px;
+  transition:all .3s;
+}
+.cta-candidat:hover{background:var(--warm);transform:translateY(-2px);}
+.cta-candidat-icon{font-size:18px;line-height:1;}
+.cta-entreprise{
+  border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6);
+  padding:22px 40px;margin-left:2px;
+  font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+  text-decoration:none;display:flex;align-items:center;gap:10px;
+  transition:all .3s;
+}
+.cta-entreprise:hover{border-color:rgba(255,255,255,.5);color:var(--white);}
+.cta-entreprise-arr{transition:transform .3s;}
+.cta-entreprise:hover .cta-entreprise-arr{transform:translateX(6px);}
 
-.mission{padding:140px 60px 120px;display:grid;grid-template-columns:240px 1fr;gap:80px;align-items:start;}
-.m-label{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--sand);padding-top:10px;}
-.m-phrase{font-size:clamp(32px,4.2vw,56px);font-weight:300;line-height:1.38;letter-spacing:-.01em;}
-.m-phrase strong{font-weight:500;}
+.hero-scroll{position:absolute;right:56px;bottom:72px;z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;animation:fadein 1s 1.4s forwards;}
+.hero-scroll p{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:rgba(255,255,255,.3);writing-mode:vertical-rl;}
+.scroll-line{width:1px;height:48px;background:linear-gradient(to bottom,var(--sand) 0%,transparent 100%);animation:scrollpulse 2s ease infinite;}
 
-.pb-wrap{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid rgba(12,12,11,.1);}
-.pb-col{padding:80px 60px;border-right:1px solid rgba(12,12,11,.1);}
-.pb-col:last-child{border-right:none;}
-.pb-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--sand);margin-bottom:28px;}
-.pb-col h3{font-size:28px;font-weight:400;line-height:1.25;margin-bottom:32px;}
-.pb-list{list-style:none;display:flex;flex-direction:column;gap:18px;}
-.pb-list li{font-size:16px;line-height:1.7;color:var(--mid);padding-left:22px;position:relative;font-weight:300;}
-.pb-list li::before{content:'—';position:absolute;left:0;color:var(--sand);font-size:12px;top:4px;}
+/* ── ABOUT — phrase éditoriale ── */
+.about{
+  padding:120px 56px 100px;
+  display:grid;grid-template-columns:200px 1fr;gap:72px;align-items:start;
+  background:var(--black);border-top:1px solid rgba(255,255,255,.05);
+}
+.about-label{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--sand);padding-top:8px;}
+.about-phrase{font-size:clamp(28px,3.5vw,48px);font-weight:300;line-height:1.42;color:rgba(255,255,255,.88);}
+.about-phrase strong{font-weight:500;color:var(--white);}
 
-.stat-strip{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(255,255,255,.08);}
-.stat-item{padding:72px 60px;border-right:1px solid rgba(255,255,255,.08);transition:background .4s;}
-.stat-item:last-child{border-right:none;}
-.stat-item:hover{background:rgba(196,149,106,.06);}
-.s-num{font-size:clamp(56px,6.5vw,88px);font-weight:300;line-height:1;letter-spacing:-.03em;color:var(--white);}
-.s-num b{color:var(--sand);font-style:italic;font-weight:300;}
-.s-lbl{margin-top:16px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--grey);}
+/* ── DOUBLE CTA SPLIT ── */
+.split{display:grid;grid-template-columns:1fr 1fr;min-height:600px;border-top:1px solid rgba(255,255,255,.05);}
 
-.poles-section{padding:140px 60px 120px;}
-.poles-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:80px;}
-.poles-title{font-size:clamp(38px,5vw,68px);font-weight:300;line-height:1.08;}
-.poles-title em{font-style:italic;color:var(--sand);}
-.sec-n{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.3em;color:var(--grey);}
-.tabs-nav{display:flex;border-bottom:1px solid rgba(12,12,11,.12);}
-.tab-btn{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;padding:18px 0;margin-right:52px;border:none;background:none;cursor:none;color:var(--grey);position:relative;transition:color .3s;}
-.tab-btn::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;background:var(--sand);transform:scaleX(0);transition:transform .3s;}
-.tab-btn.active{color:var(--black);}
-.tab-btn.active::after{transform:scaleX(1);}
-.tab-panel{display:none;}
-.tab-panel.active{display:grid;grid-template-columns:1fr 1fr;gap:120px;align-items:center;padding:80px 0 0;animation:fadeIn .5s ease;}
-.tp-text h3{font-size:clamp(28px,3vw,42px);font-weight:400;line-height:1.2;margin-bottom:24px;}
-.tp-text p{font-size:17px;line-height:1.8;color:var(--mid);font-weight:300;margin-bottom:36px;}
-.tp-link{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--sand);text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:gap .3s;}
-.tp-link:hover{gap:18px;}
-.tp-visual{aspect-ratio:4/5;position:relative;overflow:hidden;}
-.tp-v1{background:radial-gradient(ellipse 80% 80% at 60% 40%,rgba(100,60,23,.5),rgba(26,19,14,1));}
-.tp-v2{background:radial-gradient(ellipse 80% 80% at 40% 60%,rgba(91,87,51,.45),rgba(26,19,14,1));}
-.tp-v3{background:radial-gradient(ellipse 80% 80% at 50% 30%,rgba(44,49,60,.6),rgba(26,19,14,1));}
-.tp-visual-label{position:absolute;bottom:32px;left:32px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.35);}
+/* panneau candidats */
+.split-candidat{
+  background:var(--cream);color:var(--black);
+  padding:80px 64px 80px 56px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  border-right:1px solid rgba(12,12,11,.08);
+  position:relative;overflow:hidden;
+}
+.split-candidat::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 80% 20%,rgba(196,149,106,.12),transparent);
+  pointer-events:none;
+}
+.split-entreprise{
+  background:#0f0d0b;color:var(--white);
+  padding:80px 56px 80px 64px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  position:relative;overflow:hidden;
+}
+.split-entreprise::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 20% 80%,rgba(100,60,23,.2),transparent);
+  pointer-events:none;
+}
+.split-num{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:56px;opacity:.45;}
+.split-candidat .split-num{color:var(--brown);}
+.split-entreprise .split-num{color:var(--sand);}
+.split-h{font-size:clamp(36px,3.5vw,52px);font-weight:300;line-height:1.1;margin-bottom:20px;}
+.split-candidat .split-h{color:var(--black);}
+.split-h em{font-style:italic;}
+.split-candidat .split-h em{color:var(--brown);}
+.split-entreprise .split-h em{color:var(--sand);}
+.split-p{font-size:16px;line-height:1.8;margin-bottom:52px;}
+.split-candidat .split-p{color:var(--mid);}
+.split-entreprise .split-p{color:rgba(255,255,255,.5);}
 
-.process-sec{padding:0 60px 140px;border-top:1px solid rgba(12,12,11,.08);}
-.process-hd{padding:80px 0 64px;display:flex;justify-content:space-between;align-items:flex-end;}
-.process-hd h2{font-size:clamp(36px,4.5vw,60px);font-weight:300;}
-.process-hd h2 em{font-style:italic;color:var(--sand);}
-.p-steps{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid rgba(12,12,11,.1);}
-.p-step{padding:64px 48px;border-right:1px solid rgba(12,12,11,.1);transition:background .3s;}
-.p-step:last-child{border-right:none;}
-.p-step:hover{background:rgba(196,149,106,.04);}
-.p-n{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.3em;color:var(--sand);margin-bottom:32px;}
-.p-title{font-size:22px;font-weight:400;margin-bottom:20px;line-height:1.25;}
-.p-items{list-style:none;display:flex;flex-direction:column;gap:11px;}
-.p-items li{font-size:14.5px;line-height:1.65;color:var(--mid);padding-left:18px;position:relative;}
-.p-items li::before{content:'·';position:absolute;left:0;color:var(--sand);}
-
-.real-sec{padding:120px 60px;border-top:1px solid rgba(255,255,255,.07);}
-.real-inner{display:grid;grid-template-columns:5fr 7fr;gap:100px;align-items:center;}
-.real-text h2{font-size:clamp(34px,4vw,52px);font-weight:300;line-height:1.2;margin-bottom:24px;}
-.real-text h2 em{font-style:italic;color:var(--sand);}
-.real-text p{font-size:16px;line-height:1.85;color:var(--grey);font-weight:300;}
-.real-nums{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid rgba(255,255,255,.07);}
-.r-num-item{padding:52px 36px;border-right:1px solid rgba(255,255,255,.07);text-align:center;}
-.r-num-item:last-child{border-right:none;}
-.r-big{font-size:clamp(40px,4.5vw,62px);font-weight:300;line-height:1;color:var(--white);}
-.r-big b{color:var(--sand);font-style:italic;font-weight:300;}
-.r-small{margin-top:12px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--grey);line-height:1.5;}
-
-.cv-sec{padding:140px 60px;background:var(--cream);}
-.cv-inner{display:grid;grid-template-columns:1fr 1fr;gap:120px;align-items:start;}
-.cv-l h2{font-size:clamp(36px,4.5vw,58px);font-weight:300;line-height:1.15;margin-bottom:28px;}
-.cv-l h2 em{font-style:italic;color:var(--brown);}
-.cv-l p{font-size:16px;line-height:1.85;color:var(--mid);margin-bottom:48px;}
-.cv-steps{display:flex;flex-direction:column;gap:24px;}
-.cv-step{display:flex;gap:20px;align-items:flex-start;}
-.cv-step-n{font-family:'DM Mono',monospace;font-size:11px;color:var(--brown);min-width:24px;padding-top:3px;}
-.cv-step-t{font-size:16px;color:var(--mid);line-height:1.65;}
-.form{display:flex;flex-direction:column;gap:20px;}
-.frow{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-.fg{display:flex;flex-direction:column;gap:8px;}
-.fg label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--grey);}
-.fg input,.fg select,.fg textarea{background:rgba(12,12,11,.04);border:1px solid rgba(12,12,11,.15);color:var(--black);padding:16px 18px;font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:300;outline:none;transition:border-color .3s;cursor:none;border-radius:0;-webkit-appearance:none;}
+/* FORM CANDIDAT */
+.cv-form{display:flex;flex-direction:column;gap:16px;position:relative;z-index:1;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.fg{display:flex;flex-direction:column;gap:7px;}
+.fg label{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--grey);}
+.fg input,.fg select,.fg textarea{
+  background:rgba(12,12,11,.05);border:1px solid rgba(12,12,11,.18);
+  color:var(--black);padding:14px 16px;
+  font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:300;
+  outline:none;transition:border-color .3s;cursor:none;border-radius:0;-webkit-appearance:none;
+}
 .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--brown);}
 .fg input::placeholder,.fg textarea::placeholder{color:rgba(12,12,11,.28);}
 .fg select option{background:var(--cream);}
-.fg textarea{resize:none;height:90px;}
-.drop-z{border:1px dashed rgba(100,60,23,.35);padding:44px;text-align:center;transition:all .3s;cursor:none;}
-.drop-z:hover,.drop-z.over{border-color:var(--brown);background:rgba(100,60,23,.03);}
-.dz-icon{font-size:28px;margin-bottom:14px;opacity:.4;color:var(--brown);}
-.dz-text{font-size:15px;color:var(--mid);line-height:1.6;}
-.dz-text strong{color:var(--brown);font-weight:400;}
-.dz-hint{margin-top:8px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--grey);}
-.dz-name{margin-top:10px;font-family:'DM Mono',monospace;font-size:11px;color:var(--brown);}
+.fg textarea{resize:none;height:80px;}
+
+/* drop zone */
+.dropz{
+  border:1px dashed rgba(100,60,23,.4);padding:32px;
+  text-align:center;transition:all .3s;cursor:none;background:transparent;
+}
+.dropz:hover,.dropz.on{border-color:var(--brown);background:rgba(100,60,23,.03);}
+.dz-ico{font-size:22px;opacity:.35;margin-bottom:10px;color:var(--brown);}
+.dz-txt{font-size:14px;color:var(--mid);line-height:1.5;}
+.dz-txt strong{color:var(--brown);font-weight:400;}
+.dz-hint{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--grey);margin-top:6px;}
+.dz-name{font-family:'DM Mono',monospace;font-size:10px;color:var(--brown);margin-top:8px;}
 #fi{display:none;}
-.f-submit{background:var(--black);color:var(--white);border:none;padding:20px 48px;font-family:'DM Mono',monospace;font-size:11.5px;letter-spacing:.25em;text-transform:uppercase;cursor:none;transition:all .3s;width:100%;margin-top:8px;}
-.f-submit:hover{background:var(--brown);}
-.f-ok{display:none;text-align:center;padding:60px 32px;border:1px solid rgba(100,60,23,.25);}
-.f-ok.show{display:block;}
-.f-ok h3{font-size:28px;font-weight:300;margin-bottom:14px;}
-.f-ok p{color:var(--grey);font-size:15px;line-height:1.7;}
+.btn-submit-c{
+  background:var(--black);color:var(--white);border:none;
+  padding:18px 40px;
+  font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  cursor:none;transition:background .3s;width:100%;margin-top:4px;
+}
+.btn-submit-c:hover{background:var(--brown);}
+.form-ok{display:none;padding:48px 32px;text-align:center;border:1px solid rgba(100,60,23,.25);}
+.form-ok.on{display:block;}
+.form-ok h3{font-size:26px;font-weight:300;margin-bottom:12px;}
+.form-ok p{color:var(--grey);font-size:15px;line-height:1.7;}
 
-.geo-sec{padding:80px 60px;border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07);}
-.geo-title{font-size:clamp(24px,3vw,40px);font-weight:300;margin-bottom:52px;text-align:center;}
+/* FORM ENTREPRISE */
+.ent-form{display:flex;flex-direction:column;gap:16px;position:relative;z-index:1;}
+.fg-dark input,.fg-dark select,.fg-dark textarea{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  color:var(--white);padding:14px 16px;
+  font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:300;
+  outline:none;transition:border-color .3s;cursor:none;border-radius:0;-webkit-appearance:none;
+}
+.fg-dark input:focus,.fg-dark select:focus,.fg-dark textarea:focus{border-color:var(--sand);}
+.fg-dark input::placeholder,.fg-dark textarea::placeholder{color:rgba(255,255,255,.22);}
+.fg-dark select option{background:#0f0d0b;color:var(--white);}
+.fg-dark label{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.fg-dark textarea{resize:none;height:100px;}
+.btn-submit-e{
+  background:var(--sand);color:var(--black);border:none;
+  padding:18px 40px;
+  font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  cursor:none;transition:all .3s;width:100%;margin-top:4px;
+}
+.btn-submit-e:hover{background:var(--warm);}
+.form-ok-e{display:none;padding:48px 32px;text-align:center;border:1px solid rgba(196,149,106,.2);}
+.form-ok-e.on{display:block;}
+.form-ok-e h3{font-size:26px;font-weight:300;margin-bottom:12px;}
+.form-ok-e p{color:var(--grey);font-size:15px;line-height:1.7;}
+
+/* ── CHIFFRES ── */
+.numbers{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-top:1px solid rgba(255,255,255,.06);
+  background:var(--black);
+}
+.num-item{padding:64px 56px;border-right:1px solid rgba(255,255,255,.06);transition:background .4s;}
+.num-item:last-child{border-right:none;}
+.num-item:hover{background:rgba(196,149,106,.04);}
+.num-big{font-size:clamp(52px,6vw,80px);font-weight:300;line-height:1;letter-spacing:-.03em;color:var(--white);}
+.num-big b{color:var(--sand);font-style:italic;font-weight:300;}
+.num-lbl{margin-top:14px;font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--grey);}
+
+/* ── GEO ── */
+.geo{padding:72px 56px;border-top:1px solid rgba(255,255,255,.05);}
+.geo-title{font-size:clamp(22px,2.5vw,36px);font-weight:300;margin-bottom:44px;text-align:center;color:rgba(255,255,255,.7);}
 .geo-title em{font-style:italic;color:var(--sand);}
-.geo-grid{display:flex;justify-content:center;flex-wrap:wrap;gap:0;border:1px solid rgba(255,255,255,.07);}
-.geo-i{padding:20px 44px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--grey);border-right:1px solid rgba(255,255,255,.07);transition:color .3s;}
-.geo-i:last-child{border-right:none;}
-.geo-i:hover{color:var(--sand);}
+.geo-row{display:flex;justify-content:center;flex-wrap:wrap;border:1px solid rgba(255,255,255,.07);}
+.geo-dot{padding:18px 40px;font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);border-right:1px solid rgba(255,255,255,.07);transition:color .3s;}
+.geo-dot:last-child{border-right:none;}
+.geo-dot:hover{color:var(--sand);}
 
-footer{padding:80px 60px 48px;background:var(--cream);border-top:1px solid rgba(12,12,11,.08);}
-.ft-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:80px;margin-bottom:60px;}
-.ft-brand p{font-size:14px;line-height:1.85;color:var(--mid);max-width:300px;font-weight:300;margin-top:20px;}
-.ft-col h4{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--brown);margin-bottom:24px;}
-.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:13px;}
-.ft-col ul a{color:var(--mid);text-decoration:none;font-size:14.5px;transition:color .3s;}
-.ft-col ul a:hover{color:var(--black);}
-.ft-bot{padding-top:28px;border-top:1px solid rgba(12,12,11,.08);display:flex;justify-content:space-between;}
-.ft-bot p{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;color:rgba(12,12,11,.32);text-transform:uppercase;}
+/* ── FOOTER ── */
+footer{padding:64px 56px 44px;border-top:1px solid rgba(255,255,255,.06);}
+.ft{display:grid;grid-template-columns:2fr 1fr 1fr;gap:72px;margin-bottom:52px;}
+.ft-about{font-size:14px;line-height:1.85;color:rgba(255,255,255,.35);max-width:280px;margin-top:20px;}
+.ft-col h4{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--sand);margin-bottom:20px;}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:11px;}
+.ft-col a{color:rgba(255,255,255,.38);text-decoration:none;font-size:14px;transition:color .3s;}
+.ft-col a:hover{color:var(--white);}
+.ft-bot{border-top:1px solid rgba(255,255,255,.05);padding-top:24px;display:flex;justify-content:space-between;}
+.ft-bot p{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.2);}
 
-.rv{opacity:0;transform:translateY(32px);transition:opacity .9s ease,transform .9s ease;}
+/* ── REVEAL ── */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .85s ease,transform .85s ease;}
 .rv.in{opacity:1;transform:translateY(0);}
 
-.notif{position:fixed;bottom:40px;right:40px;background:var(--sand);color:var(--black);padding:16px 28px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.15em;z-index:1000;transform:translateY(100px);opacity:0;transition:all .4s;}
-.notif.show{transform:translateY(0);opacity:1;}
+/* ── NOTIF ── */
+.notif{position:fixed;bottom:36px;right:36px;background:var(--sand);color:var(--black);padding:14px 24px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.15em;z-index:2000;transform:translateY(80px);opacity:0;transition:all .4s;}
+.notif.on{transform:translateY(0);opacity:1;}
 
-@keyframes up{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
-@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-@keyframes pulse{0%,100%{opacity:.4;}50%{opacity:1;}}
+/* ── KF ── */
+@keyframes fadeup{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadein{from{opacity:0;}to{opacity:1;}}
+@keyframes scrollpulse{0%,100%{opacity:.4}50%{opacity:1}}
 </style>
 </head>
 <body>
 
-<div class="cur" id="cur"></div>
-<div class="cur-r" id="cur-r"></div>
-<div class="notif" id="notif">Profil reçu — Nous vous recontactons sous 48h</div>
+<div class="dot" id="dot"></div>
+<div class="ring" id="ring"></div>
+<div class="notif" id="notif">Message envoyé — nous vous répondons sous 48h</div>
 
-<!-- ═══ NAV ═══ -->
+<!-- ══ NAV ══ -->
 <nav id="nav">
-  <div class="nav-bg"></div>
-  <a href="#" class="nav-logo" id="nav-logo-link">
-    <!--
-      DARA LOGO — fidèle à l'original :
-      Approche stroke avec round linecaps/linejoin.
-      D : vertical gauche + courbe droite arrondie
-      A1 : 2 jambes ouvertes, étoile 4 branches au centre-sommet (pas de barre)
-      R : vertical + bosse arrondie + jambe diagonale
-      A2 : 2 jambes très écartées courbées vers l'extérieur au bas, pas de barre
-    -->
-    <svg id="logo-svg" viewBox="0 0 310 82" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:32px;width:auto;">
-  <path d="M70.37 39.52C70.37 64.39 51.78 79.54 27.27 79.54H0.39V0.21H27.86C53.32 0.21 70.37 15.96 70.37 39.52Z" fill="white"/>
-  <path d="M99.68 38.22L111.83 8.01C113.33 4.29 118.61 4.33 120.05 8.08L142.42 66.32C143.92 70.22 139.43 73.68 136.05 71.23L116.63 57.17C113.77 55.10 110.43 53.78 106.92 53.35C101.58 52.68 96.39 55.42 93.92 60.21L85.33 76.86" stroke="white" stroke-width="9.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M180.12 79.54H168.28V0.21H195.87C212.68 0.21 225.82 7.91 225.82 24.25C225.82 35.50 218.96 43.67 207.83 46.03C214.22 49.11 217.65 55.62 222.27 64.98L229.49 79.54H216.47L209.84 66.16C205.10 56.81 201.20 50.65 190.07 50.65H180.24L180.12 79.54Z" fill="white"/>
-  <path d="M260.57 38.22L272.72 8.01C274.21 4.29 279.50 4.33 280.94 8.08L303.31 66.32C304.81 70.22 300.31 73.68 296.93 71.23L277.52 57.17C274.66 55.10 271.32 53.78 267.81 53.35C262.46 52.68 257.27 55.42 254.80 60.21L246.22 76.86" stroke="white" stroke-width="9.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
+  <a href="#" class="logo-wrap">
+    <svg id="lsv" viewBox="200 450 660 190" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:30px;width:auto;">
+      <path id="lf" fill="white" d="M356.02 543.014C356.02 594.61 317.446 626.059 266.588 626.059H210.815V461.444H267.816C320.64 461.444 356.02 494.121 356.02 543.014ZM330.222 543.014C330.222 508.126 304.67 484.539 267.816 484.539H235.876V603.209H266.588C302.459 603.209 330.222 580.605 330.222 543.014ZM583.771 626.059H559.201V461.444H616.448C651.336 461.444 678.608 477.414 678.608 511.32C678.608 534.661 664.358 551.613 641.263 556.527C654.53 562.915 661.655 576.428 671.238 595.838L686.225 626.059H659.199L645.44 598.295C635.612 578.885 627.504 566.109 604.409 566.109H584.016L583.771 626.059ZM616.693 484.539H584.262L584.016 543.751H616.202C637.332 543.751 652.81 533.432 652.81 513.531C652.81 493.138 636.595 484.539 616.693 484.539Z"/>
+      <path id="ls1" fill="none" stroke="white" stroke-width="19.7035" d="M416.855 540.313L442.064 477.629C445.171 469.904 456.137 469.99 459.122 477.763L505.547 598.632C508.653 606.718 499.33 613.885 492.314 608.805L452.03 579.634C446.089 575.332 439.156 572.602 431.877 571.699C420.786 570.324 410.015 576.009 404.893 585.941L387.07 620.501"/>
+      <path id="ls2" fill="none" stroke="white" stroke-width="19.7035" d="M750.71 540.313L775.92 477.629C779.027 469.904 789.992 469.99 792.977 477.763L839.403 598.632C842.509 606.718 833.185 613.885 826.169 608.805L785.885 579.634C779.944 575.332 773.011 572.602 765.732 571.699C754.642 570.324 743.87 576.009 738.748 585.941L720.926 620.501"/>
+    </svg>
   </a>
   <ul class="nav-links">
-    <li><a href="#mission">Mission</a></li>
-    <li><a href="#poles">Services</a></li>
-    <li><a href="#process">Process</a></li>
-    <li><a href="#cv">Candidats</a></li>
-    <li><a href="#contact" class="nav-cta">Recruter</a></li>
+    <li><a href="#candidats">Candidats</a></li>
+    <li><a href="#entreprises">Entreprises</a></li>
+    <li><a href="#candidats" class="nav-pill">Déposer mon CV</a></li>
   </ul>
 </nav>
 
-<!-- ═══ HERO ═══ -->
+<!-- ══ HERO ══ -->
 <section class="hero">
-  <div class="hero-art"></div>
+  <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
-  <div class="hero-grain"></div>
-  <div class="hero-content">
-    <p class="hero-eyebrow">Diaspora · Afrique · Excellence</p>
-    <h1 class="hero-h1">Le talent n'a<br>pas de <em>frontières.</em></h1>
-    <p class="hero-sub">Dara met en relation les entreprises africaines avec des talents de haut niveau issus de la diaspora — du recrutement à l'intégration.</p>
-    <div class="hero-actions">
-      <a href="#cv" class="btn-fill">Déposer mon CV</a>
-      <a href="#poles" class="btn-ghost">Nos services <span>→</span></a>
+  <div class="hero-noise"></div>
+
+  <div class="hero-inner">
+    <p class="hero-tag">Diaspora · Afrique · Excellence</p>
+    <h1 class="hero-h1">Le talent africain<br>mérite <em>mieux.</em></h1>
+    <p class="hero-caption">Cabinet de chasse de tête spécialisé dans la connexion entre la diaspora africaine et les opportunités sur le continent.</p>
+    <div class="hero-ctas">
+      <a href="#candidats" class="cta-candidat">
+        <span class="cta-candidat-icon">↑</span>
+        Déposer mon CV
+      </a>
+      <a href="#entreprises" class="cta-entreprise">
+        Vous êtes une entreprise <span class="cta-entreprise-arr">→</span>
+      </a>
     </div>
   </div>
-  <div class="hero-scroll-ind">
-    <div class="scroll-bar"></div>
-    <p>Scroll</p>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <p>Défiler</p>
   </div>
 </section>
 
-<!-- ═══ MISSION ═══ -->
-<section class="mission s-cream" id="mission">
-  <div class="m-label rv">Notre mission</div>
-  <p class="m-phrase rv">Répondre à une <strong>double problématique</strong> — des entreprises africaines qui peinent à recruter des profils qualifiés, et des talents de la diaspora en attente d'<strong>opportunités à la hauteur de leurs ambitions.</strong></p>
+<!-- ══ ABOUT ══ -->
+<section class="about">
+  <div class="about-label rv">Notre rôle</div>
+  <p class="about-phrase rv">
+    Nous créons le pont entre les <strong>talents de la diaspora</strong> formés en Europe et les <strong>entreprises africaines</strong> qui recrutent au plus haut niveau.
+  </p>
 </section>
 
-<!-- ═══ DOUBLE PROBLEMATIQUE ═══ -->
-<div class="pb-wrap s-cream">
-  <div class="pb-col rv">
-    <div class="pb-tag">Côté entreprises</div>
-    <h3>Difficulté à recruter des profils qualifiés</h3>
-    <ul class="pb-list">
-      <li>Rareté des profils techniques — ingénierie, finance, numérique</li>
-      <li>Coûts élevés pour atteindre les bons candidats</li>
-      <li>Faible volume d'opportunités sur les plateformes formelles</li>
-    </ul>
+<!-- ══ CHIFFRES ══ -->
+<div class="numbers">
+  <div class="num-item rv">
+    <div class="num-big">10<b>+</b></div>
+    <div class="num-lbl">Consultants</div>
   </div>
-  <div class="pb-col rv">
-    <div class="pb-tag">Côté candidats</div>
-    <h3>Profils en attente d'opportunités</h3>
-    <ul class="pb-list">
-      <li>Méconnaissance des principaux acteurs économiques en Afrique</li>
-      <li>Parcours du combattant pour décrocher un poste sur le continent</li>
-      <li>Manque de passerelles concrètes entre diaspora et marché local</li>
-    </ul>
+  <div class="num-item rv">
+    <div class="num-big">3</div>
+    <div class="num-lbl">Pays représentés</div>
+  </div>
+  <div class="num-item rv">
+    <div class="num-big">600<b>+</b></div>
+    <div class="num-lbl">Profils dans notre réseau</div>
   </div>
 </div>
 
-<!-- ═══ STATS ═══ -->
-<div class="stat-strip s-dark">
-  <div class="stat-item rv"><div class="s-num">10<b>+</b></div><div class="s-lbl">Consultants</div></div>
-  <div class="stat-item rv"><div class="s-num">3</div><div class="s-lbl">Pays représentés</div></div>
-  <div class="stat-item rv"><div class="s-num">600<b>+</b></div><div class="s-lbl">Abonnés LinkedIn</div></div>
-</div>
+<!-- ══ SPLIT CANDIDATS / ENTREPRISES ══ -->
+<section class="split" id="candidats">
 
-<!-- ═══ 3 POLES ═══ -->
-<section class="poles-section s-cream" id="poles">
-  <div class="poles-header rv">
-    <h2 class="poles-title">3 pôles <em>d'activité</em></h2>
-    <span class="sec-n">02 / Services</span>
-  </div>
-  <div class="tabs-nav rv">
-    <button class="tab-btn active" onclick="switchTab(0)">Dara Search</button>
-    <button class="tab-btn" onclick="switchTab(1)">Dara Branding</button>
-    <button class="tab-btn" onclick="switchTab(2)">Dara Relocation</button>
-  </div>
-  <div id="tab0" class="tab-panel active">
-    <div class="tp-text">
-      <h3>Service de chasse de tête</h3>
-      <p>Identification, approche directe et sélection des profils executives pour vos mandats stratégiques. Nous sourceons des profils rares issus de la diaspora africaine, formés en Europe et prêts à contribuer au développement du continent.</p>
-      <a href="#cv" class="tp-link">Déposer un profil →</a>
+  <!-- CÔTÉ CANDIDAT -->
+  <div class="split-candidat">
+    <div>
+      <div class="split-num">01 — Candidats</div>
+      <h2 class="split-h">Votre prochain poste<br>est <em>sur le continent.</em></h2>
+      <p class="split-p">Déposez votre CV dans notre CVthèque. Nos consultants étudient chaque profil et vous contactent pour les opportunités qui correspondent à vos ambitions.</p>
     </div>
-    <div class="tp-visual tp-v1"><span class="tp-visual-label">Search</span></div>
-  </div>
-  <div id="tab1" class="tab-panel">
-    <div class="tp-text">
-      <h3>Développement de marque employeur</h3>
-      <p>Aidez vos entreprises à attirer et fidéliser les meilleurs talents de la diaspora. Nous construisons votre positionnement RH et votre présence sur les canaux où se trouvent vos futurs collaborateurs.</p>
-      <a href="#contact" class="tp-link">En savoir plus →</a>
-    </div>
-    <div class="tp-visual tp-v2"><span class="tp-visual-label">Branding</span></div>
-  </div>
-  <div id="tab2" class="tab-panel">
-    <div class="tp-text">
-      <h3>Accompagnement à l'installation</h3>
-      <p>Faciliter la mobilité des candidats vers l'Afrique — logement, démarches administratives, intégration sociale et professionnelle. Un service clé en main pour que le retour au continent se passe dans les meilleures conditions.</p>
-      <a href="#contact" class="tp-link">En savoir plus →</a>
-    </div>
-    <div class="tp-visual tp-v3"><span class="tp-visual-label">Relocation</span></div>
-  </div>
-</section>
 
-<!-- ═══ PROCESS ═══ -->
-<section class="process-sec s-cream" id="process">
-  <div class="process-hd rv">
-    <h2>Notre <em>process</em></h2>
-    <span class="sec-n">03 / Méthode</span>
-  </div>
-  <div class="p-steps rv">
-    <div class="p-step">
-      <div class="p-n">01</div>
-      <div class="p-title">Identification des profils</div>
-      <ul class="p-items"><li>Cartographie des talents</li><li>Sourcing ciblé</li><li>Entretiens d'évaluation</li></ul>
-    </div>
-    <div class="p-step">
-      <div class="p-n">02</div>
-      <div class="p-title">Envoi des candidats</div>
-      <ul class="p-items"><li>Sélection des profils</li><li>Présentation au client</li><li>Coordination des entretiens</li></ul>
-    </div>
-    <div class="p-step">
-      <div class="p-n">03</div>
-      <div class="p-title">Intégration & suivi</div>
-      <ul class="p-items"><li>Suivi post-placement</li><li>Accompagnement à l'intégration</li><li>Support relocation si besoin</li></ul>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ REALISATION ═══ -->
-<section class="real-sec s-mid">
-  <div class="real-inner">
-    <div class="real-text rv">
-      <h2>Un événement <em>fondateur</em></h2>
-      <p>Co-organisation d'un événement de recrutement majeur réunissant étudiants, jeunes professionnels et entreprises africaines — Danone, Concerto et d'autres acteurs de premier plan.</p>
-    </div>
-    <div class="real-nums rv">
-      <div class="r-num-item"><div class="r-big">2000<b>+</b></div><div class="r-small">Participants présents</div></div>
-      <div class="r-num-item"><div class="r-big">300<b>+</b></div><div class="r-small">Candidatures déposées</div></div>
-      <div class="r-num-item"><div class="r-big">120<b>+</b></div><div class="r-small">Opportunités proposées</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ CV ═══ -->
-<section class="cv-sec" id="cv">
-  <div class="cv-inner">
-    <div class="cv-l rv">
-      <h2>Rejoignez<br>notre <em>CVthèque</em></h2>
-      <p>Déposez votre profil et accédez aux meilleures opportunités sur le continent. Nos consultants étudient chaque candidature avec attention.</p>
-      <div class="cv-steps">
-        <div class="cv-step"><span class="cv-step-n">01</span><span class="cv-step-t">Dépôt confidentiel de votre profil</span></div>
-        <div class="cv-step"><span class="cv-step-n">02</span><span class="cv-step-t">Analyse par nos consultants sous 48h</span></div>
-        <div class="cv-step"><span class="cv-step-n">03</span><span class="cv-step-t">Mise en relation ciblée</span></div>
+    <form class="cv-form" id="cvform">
+      <div class="frow">
+        <div class="fg"><label>Prénom</label><input type="text" placeholder="Aminata" required></div>
+        <div class="fg"><label>Nom</label><input type="text" placeholder="Diallo" required></div>
       </div>
+      <div class="fg"><label>Email</label><input type="email" placeholder="aminata@exemple.com" required></div>
+      <div class="frow">
+        <div class="fg">
+          <label>Secteur</label>
+          <select required>
+            <option value="" disabled selected>Choisir...</option>
+            <option>Finance & Banque</option>
+            <option>Tech & Digital</option>
+            <option>Ingénierie</option>
+            <option>Santé & Pharma</option>
+            <option>Agriculture & Food</option>
+            <option>Conseil & Services</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Expérience</label>
+          <select required>
+            <option value="" disabled selected>Choisir...</option>
+            <option>0 – 3 ans</option>
+            <option>3 – 7 ans</option>
+            <option>7 – 15 ans</option>
+            <option>15 ans +</option>
+          </select>
+        </div>
+      </div>
+      <div class="dropz" id="dz" onclick="document.getElementById('fi').click()">
+        <div class="dz-ico">⊕</div>
+        <div class="dz-txt"><strong>Glissez votre CV ici</strong> ou cliquez</div>
+        <div class="dz-hint">PDF ou DOCX — 10 Mo max</div>
+        <div class="dz-name" id="dzn"></div>
+      </div>
+      <input type="file" id="fi" accept=".pdf,.doc,.docx">
+      <button type="submit" class="btn-submit-c">Soumettre mon profil</button>
+    </form>
+
+    <div class="form-ok" id="cvok">
+      <div style="font-size:26px;margin-bottom:16px;color:var(--brown);">◈</div>
+      <h3>Profil reçu</h3>
+      <p>Nos consultants vous recontacteront<br>sous 48 heures.</p>
     </div>
+  </div>
+
+  <!-- CÔTÉ ENTREPRISE -->
+  <div class="split-entreprise" id="entreprises">
+    <div>
+      <div class="split-num">02 — Entreprises</div>
+      <h2 class="split-h">Recrutez les meilleurs<br>profils de la <em>diaspora.</em></h2>
+      <p class="split-p">Partagez-nous votre besoin en recrutement. Nous revenons vers vous avec une sélection de profils qualifiés, sourcés dans notre réseau de la diaspora africaine.</p>
+    </div>
+
+    <form class="ent-form" id="entform">
+      <div class="frow">
+        <div class="fg fg-dark"><label>Entreprise</label><input type="text" placeholder="Acme Corp" required></div>
+        <div class="fg fg-dark"><label>Contact</label><input type="text" placeholder="Jean Dupont" required></div>
+      </div>
+      <div class="fg fg-dark"><label>Email professionnel</label><input type="email" placeholder="jean@entreprise.com" required></div>
+      <div class="frow">
+        <div class="fg fg-dark">
+          <label>Secteur</label>
+          <select required>
+            <option value="" disabled selected>Choisir...</option>
+            <option>Finance & Banque</option>
+            <option>Tech & Digital</option>
+            <option>Industrie & Énergie</option>
+            <option>Santé & Pharma</option>
+            <option>Agriculture & Food</option>
+            <option>Conseil & Services</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="fg fg-dark">
+          <label>Localisation</label>
+          <select required>
+            <option value="" disabled selected>Choisir...</option>
+            <option>Sénégal</option>
+            <option>Côte d'Ivoire</option>
+            <option>Nigeria</option>
+            <option>Kenya</option>
+            <option>Maroc</option>
+            <option>Autre pays africain</option>
+            <option>International</option>
+          </select>
+        </div>
+      </div>
+      <div class="fg fg-dark">
+        <label>Votre besoin</label>
+        <textarea placeholder="Décrivez le poste ou la mission de recrutement..." required></textarea>
+      </div>
+      <button type="submit" class="btn-submit-e">Soumettre ma demande</button>
+    </form>
+
+    <div class="form-ok-e" id="entok">
+      <div style="font-size:26px;margin-bottom:16px;color:var(--sand);">◈</div>
+      <h3>Demande reçue</h3>
+      <p>Un consultant vous contactera<br>sous 48 heures.</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══ GEO ══ -->
+<section class="geo">
+  <p class="geo-title rv">Présents sur le continent <em>et au-delà</em></p>
+  <div class="geo-row rv">
+    <span class="geo-dot">Dakar</span>
+    <span class="geo-dot">Abidjan</span>
+    <span class="geo-dot">Lagos</span>
+    <span class="geo-dot">Nairobi</span>
+    <span class="geo-dot">Casablanca</span>
+    <span class="geo-dot">Paris</span>
+    <span class="geo-dot">Londres</span>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="ft">
     <div class="rv">
-      <form class="form" id="form">
-        <div class="frow">
-          <div class="fg"><label>Prénom</label><input type="text" placeholder="Aminata" required></div>
-          <div class="fg"><label>Nom</label><input type="text" placeholder="Diallo" required></div>
-        </div>
-        <div class="fg"><label>Email</label><input type="email" placeholder="aminata@exemple.com" required></div>
-        <div class="frow">
-          <div class="fg"><label>Secteur</label>
-            <select required><option value="" disabled selected>Choisir...</option>
-              <option>Finance & Banque</option><option>Tech & Digital</option>
-              <option>Ingénierie</option><option>Santé & Pharma</option>
-              <option>Agriculture & Food</option><option>Conseil & Services</option><option>Autre</option>
-            </select>
-          </div>
-          <div class="fg"><label>Expérience</label>
-            <select required><option value="" disabled selected>Choisir...</option>
-              <option>0 – 3 ans</option><option>3 – 7 ans</option>
-              <option>7 – 15 ans</option><option>15 ans +</option>
-            </select>
-          </div>
-        </div>
-        <div class="fg"><label>Localisation actuelle</label><input type="text" placeholder="Paris, France"></div>
-        <div class="fg"><label>Message (optionnel)</label><textarea placeholder="Brève présentation et aspirations..."></textarea></div>
-        <div class="drop-z" id="dz" onclick="document.getElementById('fi').click()">
-          <div class="dz-icon">⊕</div>
-          <div class="dz-text"><strong>Glissez votre CV ici</strong><br>ou cliquez pour parcourir</div>
-          <div class="dz-hint">PDF, DOCX — 10 Mo max</div>
-          <div class="dz-name" id="dz-n"></div>
-        </div>
-        <input type="file" id="fi" accept=".pdf,.doc,.docx">
-        <button type="submit" class="f-submit">Soumettre mon profil</button>
-      </form>
-      <div class="f-ok" id="fok">
-        <div style="font-size:28px;margin-bottom:20px;color:var(--brown);">◈</div>
-        <h3>Profil reçu</h3>
-        <p>Nos consultants reviendront vers vous sous 48 heures.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ GEO ═══ -->
-<section class="geo-sec s-dark">
-  <h2 class="geo-title rv">Présents sur le continent <em>et au-delà</em></h2>
-  <div class="geo-grid rv">
-    <div class="geo-i">Dakar</div><div class="geo-i">Abidjan</div>
-    <div class="geo-i">Lagos</div><div class="geo-i">Nairobi</div>
-    <div class="geo-i">Casablanca</div><div class="geo-i">Paris</div>
-    <div class="geo-i">Londres</div>
-  </div>
-</section>
-
-<!-- ═══ FOOTER ═══ -->
-<footer id="contact">
-  <div class="ft-top">
-    <div class="ft-brand rv">
-      <!-- Logo footer -->
-      <svg viewBox="0 0 310 82" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:26px;width:auto;">
-  <path d="M70.37 39.52C70.37 64.39 51.78 79.54 27.27 79.54H0.39V0.21H27.86C53.32 0.21 70.37 15.96 70.37 39.52Z" fill="#0c0c0b"/>
-  <path d="M99.68 38.22L111.83 8.01C113.33 4.29 118.61 4.33 120.05 8.08L142.42 66.32C143.92 70.22 139.43 73.68 136.05 71.23L116.63 57.17C113.77 55.10 110.43 53.78 106.92 53.35C101.58 52.68 96.39 55.42 93.92 60.21L85.33 76.86" stroke="#0c0c0b" stroke-width="9.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M180.12 79.54H168.28V0.21H195.87C212.68 0.21 225.82 7.91 225.82 24.25C225.82 35.50 218.96 43.67 207.83 46.03C214.22 49.11 217.65 55.62 222.27 64.98L229.49 79.54H216.47L209.84 66.16C205.10 56.81 201.20 50.65 190.07 50.65H180.24L180.12 79.54Z" fill="#0c0c0b"/>
-  <path d="M260.57 38.22L272.72 8.01C274.21 4.29 279.50 4.33 280.94 8.08L303.31 66.32C304.81 70.22 300.31 73.68 296.93 71.23L277.52 57.17C274.66 55.10 271.32 53.78 267.81 53.35C262.46 52.68 257.27 55.42 254.80 60.21L246.22 76.86" stroke="#0c0c0b" stroke-width="9.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-      <p>Cabinet de chasse de tête spécialisé dans la mobilité des talents entre la diaspora africaine et le continent. France · Sénégal · Côte d'Ivoire.</p>
+      <svg viewBox="200 450 660 190" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:24px;width:auto;">
+        <path fill="white" d="M356.02 543.014C356.02 594.61 317.446 626.059 266.588 626.059H210.815V461.444H267.816C320.64 461.444 356.02 494.121 356.02 543.014ZM330.222 543.014C330.222 508.126 304.67 484.539 267.816 484.539H235.876V603.209H266.588C302.459 603.209 330.222 580.605 330.222 543.014ZM583.771 626.059H559.201V461.444H616.448C651.336 461.444 678.608 477.414 678.608 511.32C678.608 534.661 664.358 551.613 641.263 556.527C654.53 562.915 661.655 576.428 671.238 595.838L686.225 626.059H659.199L645.44 598.295C635.612 578.885 627.504 566.109 604.409 566.109H584.016L583.771 626.059ZM616.693 484.539H584.262L584.016 543.751H616.202C637.332 543.751 652.81 533.432 652.81 513.531C652.81 493.138 636.595 484.539 616.693 484.539Z"/>
+        <path fill="none" stroke="white" stroke-width="19.7035" d="M416.855 540.313L442.064 477.629C445.171 469.904 456.137 469.99 459.122 477.763L505.547 598.632C508.653 606.718 499.33 613.885 492.314 608.805L452.03 579.634C446.089 575.332 439.156 572.602 431.877 571.699C420.786 570.324 410.015 576.009 404.893 585.941L387.07 620.501"/>
+        <path fill="none" stroke="white" stroke-width="19.7035" d="M750.71 540.313L775.92 477.629C779.027 469.904 789.992 469.99 792.977 477.763L839.403 598.632C842.509 606.718 833.185 613.885 826.169 608.805L785.885 579.634C779.944 575.332 773.011 572.602 765.732 571.699C754.642 570.324 743.87 576.009 738.748 585.941L720.926 620.501"/>
+      </svg>
+      <p class="ft-about">Cabinet de chasse de tête entre la diaspora africaine et le continent. France · Sénégal · Côte d'Ivoire.</p>
     </div>
     <div class="ft-col rv">
       <h4>Navigation</h4>
       <ul>
-        <li><a href="#mission">Notre mission</a></li>
-        <li><a href="#poles">Nos services</a></li>
-        <li><a href="#process">Notre process</a></li>
-        <li><a href="#cv">Déposer un CV</a></li>
+        <li><a href="#candidats">Candidats</a></li>
+        <li><a href="#entreprises">Entreprises</a></li>
+        <li><a href="#candidats">Déposer un CV</a></li>
       </ul>
     </div>
     <div class="ft-col rv">
       <h4>Contact</h4>
       <ul>
-        <li><a href="/cdn-cgi/l/email-protection#c5b7a0a6b7b0acb1a8a0abb185a1a4b7a4e8a4a1b3acb6aab7bceba6aaa8"><span class="__cf_email__" data-cfemail="2a584f49585f435e474f445e6a4e4b584b074b4e5c435945585304494547">[email&#160;protected]</span></a></li>
+        <li><a href="mailto:recruitment@dara-advisory.com">recruitment@dara-advisory.com</a></li>
         <li><a href="#">@dara.advisory</a></li>
-        <li><a href="#">Dara Advisory sur LinkedIn</a></li>
+        <li><a href="#">LinkedIn</a></li>
       </ul>
     </div>
   </div>
   <div class="ft-bot">
-    <p>© 2026 Dara Advisory — Tous droits réservés</p>
-    <p>Confidentialité · Mentions légales</p>
+    <p>© 2026 Dara Advisory</p>
+    <p>Mentions légales · Confidentialité</p>
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // CURSOR
-const cur=document.getElementById('cur'),cr=document.getElementById('cur-r');
+const dot=document.getElementById('dot'),ring=document.getElementById('ring');
 let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
-(function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(loop);})();
-document.querySelectorAll('a,button,.stat-item,.p-step,.pb-col,.r-num-item,.geo-i,.drop-z').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2)';cr.style.transform='translate(-50%,-50%) scale(1.5)';cr.style.borderColor='rgba(196,149,106,.8)';});
-  el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';cr.style.transform='translate(-50%,-50%) scale(1)';cr.style.borderColor='rgba(196,149,106,.45)';});
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
+(function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+document.querySelectorAll('a,button,.num-item,.geo-dot,.dropz').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{dot.style.transform='translate(-50%,-50%) scale(2.5)';ring.style.transform='translate(-50%,-50%) scale(1.6)';ring.style.borderColor='rgba(196,149,106,.8)';});
+  el.addEventListener('mouseleave',()=>{dot.style.transform='translate(-50%,-50%) scale(1)';ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.borderColor='rgba(196,149,106,.4)';});
 });
 
-// NAV scroll — change logo stroke color
+// NAV
 const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>{
-  const s=window.scrollY>60;
-  nav.classList.toggle('scrolled',s);
-  // Update fill and stroke on scroll
-  document.querySelectorAll('#logo-svg path').forEach(el => {
-    const hasFill = el.getAttribute('fill') && el.getAttribute('fill') !== 'none';
-    const hasStroke = el.getAttribute('stroke') && el.getAttribute('stroke') !== 'none';
-    if (hasFill) el.setAttribute('fill', s ? '#0c0c0b' : 'white');
-    if (hasStroke) el.setAttribute('stroke', s ? '#0c0c0b' : 'white');
-  });
-});
+window.addEventListener('scroll',()=>nav.classList.toggle('solid',window.scrollY>40));
 
 // SCROLL REVEAL
-const obs=new IntersectionObserver(e=>{e.forEach((en,i)=>{if(en.isIntersecting){setTimeout(()=>en.target.classList.add('in'),i*65);obs.unobserve(en.target);}});},{threshold:.1});
+const obs=new IntersectionObserver(es=>{es.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*70);obs.unobserve(e.target);}});},{threshold:.1});
 document.querySelectorAll('.rv').forEach(r=>obs.observe(r));
 
-// TABS
-function switchTab(i){
-  document.querySelectorAll('.tab-btn').forEach((b,j)=>b.classList.toggle('active',i===j));
-  document.querySelectorAll('.tab-panel').forEach((p,j)=>p.classList.toggle('active',i===j));
-}
-
 // DROP ZONE
-const dz=document.getElementById('dz'),fi=document.getElementById('fi'),dzn=document.getElementById('dz-n');
+const dz=document.getElementById('dz'),fi=document.getElementById('fi'),dzn=document.getElementById('dzn');
 fi.addEventListener('change',e=>{if(e.target.files[0])dzn.textContent='✓ '+e.target.files[0].name;});
-dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('over');});
-dz.addEventListener('dragleave',()=>dz.classList.remove('over'));
-dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('over');const f=e.dataTransfer.files[0];if(f)dzn.textContent='✓ '+f.name;});
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('on');});
+dz.addEventListener('dragleave',()=>dz.classList.remove('on'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('on');const f=e.dataTransfer.files[0];if(f)dzn.textContent='✓ '+f.name;});
 
-// FORM
-document.getElementById('form').addEventListener('submit',e=>{
-  e.preventDefault()
+// FORMS
+const notif=document.getElementById('notif');
+function showNotif(msg){notif.textContent=msg;notif.classList.add('on');setTimeout(()=>notif.classList.remove('on'),4000);}
+
+document.getElementById('cvform').addEventListener('submit',e=>{
+  e.preventDefault();
+  document.getElementById('cvform').style.display='none';
+  document.getElementById('cvok').classList.add('on');
+  showNotif('Profil reçu — nous revenons vers vous sous 48h');
+});
+
+document.getElementById('entform').addEventListener('submit',e=>{
+  e.preventDefault();
+  document.getElementById('entform').style.display='none';
+  document.getElementById('entok').classList.add('on');
+  showNotif('Demande reçue — un consultant vous contacte sous 48h');
+});
+</script>
+</body>
+</html>
